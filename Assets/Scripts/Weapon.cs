@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private float fireRate = 0;
-    [SerializeField] private float Damage = 0;
+    public float Damage = 0;
     public int ammo = 0;
     private int currentAmmo = 0;
     [SerializeField] private LayerMask notToHit;
@@ -55,7 +55,9 @@ public class Weapon : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, notToHit);
         Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.cyan);
 
-        Instantiate(bullet, endOfGun.position, endOfGun.rotation);
+        GameObject bul = Instantiate(bullet, endOfGun.position, endOfGun.rotation);
+        bul.GetComponent<bulletMove>().Damage = Damage;
+
         currentAmmo--;
     }
 }

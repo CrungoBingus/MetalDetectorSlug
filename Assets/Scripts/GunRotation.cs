@@ -6,6 +6,7 @@ public class GunRotation : MonoBehaviour
 {
     private Vector3 mousePosition;
     [SerializeField] private Transform arm; // apply self
+    [SerializeField] private Transform pivotPoint;
     private Vector3 armPos;
     private float angle;
 
@@ -15,8 +16,9 @@ public class GunRotation : MonoBehaviour
         mousePosition.z = 7.55f; //distance between camera and player
         armPos = Camera.main.WorldToScreenPoint(arm.position);
         mousePosition.x = mousePosition.x - armPos.x;
-        mousePosition.y = mousePosition.y - armPos.y;
+        mousePosition.y = mousePosition.y - armPos.y - 10;
         angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        pivotPoint.transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 }
