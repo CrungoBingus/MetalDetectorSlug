@@ -15,6 +15,8 @@ public class BasicEnemy : MonoBehaviour
 
     [SerializeField] private float health = 50;
 
+    [SerializeField] private float FireRate = 1.5f;
+
     private float hold = 0f;
 
     //Damage popup stuff
@@ -31,7 +33,7 @@ public class BasicEnemy : MonoBehaviour
     private void Update()
     {
         timeSinceShoot += Time.deltaTime;
-        if (timeSinceShoot >= 1.5f)
+        if (timeSinceShoot >= FireRate)
         {
             timeSinceShoot = 0f;
             shootRot = Quaternion.Euler(0f, 0f, Random.Range(180f, 130f));

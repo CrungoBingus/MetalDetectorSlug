@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private float fireRate = 0;
+    [SerializeField] private float bulletSpeed = 0;
     public float Damage = 0;
     public int ammo = 0;
     private int currentAmmo = 0;
@@ -57,6 +58,7 @@ public class Weapon : MonoBehaviour
 
         GameObject bul = Instantiate(bullet, endOfGun.position, endOfGun.rotation);
         bul.GetComponent<bulletMove>().Damage = Damage;
+        bul.GetComponent<bulletMove>().moveSpeed = bulletSpeed;
 
         currentAmmo--;
     }

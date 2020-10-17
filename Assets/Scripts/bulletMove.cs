@@ -10,7 +10,7 @@ public class bulletMove : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 1.5f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
