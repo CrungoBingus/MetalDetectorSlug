@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private float fireRate = 0;
     [SerializeField] private float Damage = 0;
+    public int ammo = 0;
+    private int currentAmmo = 0;
     [SerializeField] private LayerMask notToHit;
 
     [SerializeField] private GameObject bullet;
@@ -19,20 +21,26 @@ public class Weapon : MonoBehaviour
         if (endOfGun == null)
         {
         }
+        currentAmmo = ammo;
+    }
+
+    private void OnEnable()
+    {
+        currentAmmo = ammo;
     }
 
     private void Update()
     {
         if (fireRate == 0)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && currentAmmo > 0)
             {
                 Shoot();
             }
         }
         else
         {
-            if (Input.GetMouseButton(0) && Time.time > timeToFire)
+            if (Input.GetMouseButton(0) && Time.time > timeToFire && currentAmmo > 0)
             {
                 timeToFire = Time.time + 1 / fireRate;
                 Shoot();
@@ -48,5 +56,6 @@ public class Weapon : MonoBehaviour
         Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.cyan);
 
         Instantiate(bullet, endOfGun.position, endOfGun.rotation);
+        currentAmmo--;
     }
 }

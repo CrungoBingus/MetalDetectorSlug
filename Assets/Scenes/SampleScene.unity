@@ -484,6 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 2
   Damage: 10
+  ammo: 16
   notToHit:
     serializedVersion: 2
     m_Bits: 0
@@ -722,7 +723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316848144}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.56799996, y: -0.04999999, z: -0.05590497}
+  m_LocalPosition: {x: 0.56799996, y: -0.04999999, z: 1}
   m_LocalScale: {x: 2, y: 5, z: 3.49406}
   m_Children: []
   m_Father: {fileID: 2146764347}
@@ -1173,7 +1174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970612691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.56799996, y: -0.04999999, z: -0.05590497}
+  m_LocalPosition: {x: 0.56799996, y: -0.04999999, z: 1}
   m_LocalScale: {x: 2, y: 5, z: 3.49406}
   m_Children: []
   m_Father: {fileID: 185322635}
@@ -1241,6 +1242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.5
   Damage: 50
+  ammo: 4
   notToHit:
     serializedVersion: 2
     m_Bits: 0
@@ -1363,7 +1365,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300278883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.56799996, y: -0.04999999, z: -0.05590497}
+  m_LocalPosition: {x: 0.56799996, y: -0.04999999, z: 1}
   m_LocalScale: {x: 2, y: 5, z: 3.49406}
   m_Children: []
   m_Father: {fileID: 1091846346}
@@ -1537,6 +1539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 5
   Damage: 5
+  ammo: 30
   notToHit:
     serializedVersion: 2
     m_Bits: 0
