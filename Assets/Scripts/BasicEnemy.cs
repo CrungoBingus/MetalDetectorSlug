@@ -26,17 +26,19 @@ public class BasicEnemy : MonoBehaviour
     private DamagePopup damagePopup;
 
     [SerializeField] private Transform target;
+    [SerializeField] private Score scoreUp;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        scoreUp = GameObject.FindGameObjectWithTag("WorldHandle").GetComponent<Score>();
     }
 
     // Update is called once per frame
     private void Update()
     {
         timeSinceShoot += Time.deltaTime;
-        if (timeSinceShoot >= FireRate)
+        if (timeSinceShoot >= FireRate && shootPos.position.x - target.position.x < 30)
         {
             shootPos.LookAt(target);
             timeSinceShoot = 0f;
@@ -55,5 +57,10 @@ public class BasicEnemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        scoreUp.score += 10;
     }
 }

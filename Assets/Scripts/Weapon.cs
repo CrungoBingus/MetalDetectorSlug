@@ -16,11 +16,13 @@ public class Weapon : MonoBehaviour
     public int MinDamage = 0;
     public int MaxDamage = 0;
     public int ammo = 0;
-    private int currentAmmo = 0;
+    public int currentAmmo = 0;
     [SerializeField] private LayerMask notToHit;
     [SerializeField] private GameObject muzzleFlash;
 
     [SerializeField] private GameObject bullet;
+
+    [SerializeField] private UiController UICont;
 
     private float timeToFire = 0;
     private Transform endOfGun;
@@ -44,6 +46,7 @@ public class Weapon : MonoBehaviour
     private void OnEnable()
     {
         currentAmmo = ammo;
+        UICont.UpdateAmmo(currentAmmo);
     }
 
     private void Update()
@@ -93,6 +96,7 @@ public class Weapon : MonoBehaviour
             bul.GetComponent<bulletMove>().moveSpeed = bulletSpeed;
         }
         currentAmmo--;
+        UICont.UpdateAmmo(currentAmmo);
     }
 
     private void MuzzleFlash()
