@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 
 public class SwapWeapons : MonoBehaviour
 {
-    [SerializeField] private GameObject metalDetector, pistol, sniper, rifle;
+    [SerializeField] private GameObject metalDetector, pistol, pistol2, sniper, sniper2, smg, smg2;
     private int weapongSelected = 2;
     private int hold = 2;
 
@@ -24,7 +25,7 @@ public class SwapWeapons : MonoBehaviour
             timeToSwap = Time.time + detectionTime;
             while (hold == weapongSelected)
             {
-                hold = Random.Range(2, 5);
+                hold = Random.Range(2, 8);
             }
             StartCoroutine(DetectGuns(hold));
             weapongSelected = hold;
@@ -35,21 +36,57 @@ public class SwapWeapons : MonoBehaviour
     {
         if (holder == 2)
         { //pistol
-            pistol.SetActive(true);
+            pistol.SetActive(true); //
             sniper.SetActive(false);
-            rifle.SetActive(false);
+            smg.SetActive(false);
+            pistol2.SetActive(false);
+            sniper2.SetActive(false);
+            smg2.SetActive(false);
         }
         if (holder == 3)
         { //sniper
             pistol.SetActive(false);
-            sniper.SetActive(true);
-            rifle.SetActive(false);
+            sniper.SetActive(true); //
+            smg.SetActive(false);
+            pistol2.SetActive(false);
+            sniper2.SetActive(false);
+            smg2.SetActive(false);
         }
         if (holder == 4)
-        { //sniper
+        { //smg
             pistol.SetActive(false);
             sniper.SetActive(false);
-            rifle.SetActive(true);
+            smg.SetActive(true); //
+            pistol2.SetActive(false);
+            sniper2.SetActive(false);
+            smg2.SetActive(false);
+        }
+        if (holder == 5)
+        { //pistol - 2
+            pistol.SetActive(false);
+            sniper.SetActive(false);
+            smg.SetActive(false);
+            pistol2.SetActive(true); //
+            sniper2.SetActive(false);
+            smg2.SetActive(false);
+        }
+        if (holder == 6)
+        { //sniper - 2
+            pistol.SetActive(false);
+            sniper.SetActive(false);
+            smg.SetActive(false);
+            pistol2.SetActive(false);
+            sniper2.SetActive(true); //
+            smg2.SetActive(false);
+        }
+        if (holder == 7)
+        { //smg - 2
+            pistol.SetActive(false);
+            sniper.SetActive(false);
+            smg.SetActive(false);
+            pistol2.SetActive(false);
+            sniper2.SetActive(false);
+            smg2.SetActive(true); //
         }
     }
 
@@ -59,7 +96,10 @@ public class SwapWeapons : MonoBehaviour
         metalDetector.SetActive(true);
         pistol.SetActive(false);
         sniper.SetActive(false);
-        rifle.SetActive(false);
+        smg.SetActive(false);
+        pistol2.SetActive(false);
+        sniper2.SetActive(false);
+        smg2.SetActive(false);
         yield return new WaitForSeconds(Random.Range(1f, 3f));
         metalDetector.SetActive(false);
         SwitchWeapon(holder);

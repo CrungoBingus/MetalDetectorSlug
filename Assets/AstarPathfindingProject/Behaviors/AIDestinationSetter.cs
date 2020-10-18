@@ -18,11 +18,6 @@ namespace Pathfinding {
 		public Transform target;
 		IAstarAI ai;
 
-		void PathAwake()
-        {
-			target = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-		
 		void OnEnable () {
 			ai = GetComponent<IAstarAI>();
 			// Update the destination right before searching for a path as well.
@@ -30,9 +25,6 @@ namespace Pathfinding {
 			// frame as the destination is used for debugging and may be used for other things by other
 			// scripts as well. So it makes sense that it is up to date every frame.
 			if (ai != null) ai.onSearchPath += Update;
-
-
-			
 		}
 
 		void OnDisable () {

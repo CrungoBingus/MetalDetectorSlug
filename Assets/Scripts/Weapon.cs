@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    private AudioSource[] sounds;
+    private AudioSource shootSound;
+    private AudioSource clipSound;
+
     [SerializeField] private float fireRate = 0;
     [SerializeField] private float bulletSpeed = 0;
-    public float Damage = 0;
+
+    [SerializeField] private int numberOfProjectiles = 1;
+
+    public int MinDamage = 0;
+    public int MaxDamage = 0;
     public int ammo = 0;
     private int currentAmmo = 0;
     [SerializeField] private LayerMask notToHit;
+    [SerializeField] private GameObject muzzleFlash;
 
     [SerializeField] private GameObject bullet;
 
@@ -25,6 +34,13 @@ public class Weapon : MonoBehaviour
         currentAmmo = ammo;
     }
 
+    private void Start()
+    {
+        sounds = GetComponents<AudioSource>();
+        shootSound = sounds[0];
+        clipSound = sounds[1];
+    }
+
     private void OnEnable()
     {
         currentAmmo = ammo;
@@ -36,7 +52,7 @@ public class Weapon : MonoBehaviour
         {
             if (Input.GetMouseButton(0) && currentAmmo > 0)
             {
-                Shoot();
+                Shoot(numberOfProjectiles);
             }
         }
         else
@@ -44,23 +60,47 @@ public class Weapon : MonoBehaviour
             if (Input.GetMouseButton(0) && Time.time > timeToFire && currentAmmo > 0)
             {
                 timeToFire = Time.time + 1 / fireRate;
-                Shoot();
+                int hold = numberOfProjectiles;
+                if (hold > 1)
+                    hold = numberOfProjectiles + Random.Range(-2, 2);
+                if (hold > 0)
+                    Shoot(hold);
+                else clipSound.Play();
+            }
+            else if (Input.GetMouseButton(0) && Time.time > timeToFire && currentAmmo == 0)
+            {
+                clipSound.Play();
+                timeToFire = Time.time + 1 / fireRate;
+                clipSound.Play();
             }
         }
     }
 
-    private void Shoot()
+    private void Shoot(int projCount)
     {
+        MuzzleFlash();
+        shootSound.Play();
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(endOfGun.position.x, endOfGun.position.y);
         RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, notToHit);
         Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.cyan);
 
-        GameObject bul = Instantiate(bullet, endOfGun.position,
-            endOfGun.rotation);
-        bul.GetComponent<bulletMove>().Damage = Damage;
-        bul.GetComponent<bulletMove>().moveSpeed = bulletSpeed;
-
+        for (int i = 0; i < projCount; i++)
+        {
+            GameObject bul = Instantiate(bullet, endOfGun.position,
+                endOfGun.rotation);
+            bul.GetComponent<bulletMove>().Damage = Random.Range(MaxDamage, MinDamage);
+            bul.GetComponent<bulletMove>().moveSpeed = bulletSpeed;
+        }
         currentAmmo--;
+    }
+
+    private void MuzzleFlash()
+    {
+        GameObject clone = Instantiate(muzzleFlash, endOfGun.position,
+            Quaternion.Euler(endOfGun.rotation.x + Random.Range(-5f, 5f), endOfGun.rotation.y, endOfGun.rotation.z));
+        float size = Random.Range(0.6f, 0.9f);
+        clone.transform.parent = endOfGun;
+        Destroy(clone, 0.1f);
     }
 }

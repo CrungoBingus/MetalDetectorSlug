@@ -43,7 +43,7 @@ public class BasicEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        hold = collision.gameObject.GetComponent<bulletMove>().Damage + (Random.Range(-5, 5));
+        hold = collision.gameObject.GetComponent<bulletMove>().Damage;
         damagePopupTransform = Instantiate(pfDamagePopup, this.transform.position, Quaternion.identity);
         damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
         damagePopup.Setup(hold.ToString());
@@ -56,7 +56,7 @@ public class BasicEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        hold = (collision.gameObject.GetComponent<bulletMove>().Damage * 2) + (Random.Range(-5, 5));
+        hold = (collision.gameObject.GetComponent<bulletMove>().Damage * 2);
         damagePopupTransform = Instantiate(pfDamagePopup, this.transform.position, Quaternion.identity);
         damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
         damagePopup.Setup(hold.ToString());
