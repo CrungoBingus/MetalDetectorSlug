@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
-using UnityEngine.XR.WSA.Input;
 
 public class SwapWeapons : MonoBehaviour
 {
