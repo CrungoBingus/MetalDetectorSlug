@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("Movement", Input.GetAxis("Horizontal"));
         animator.SetFloat("UpDownie", gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        animator.SetBool("Grounded", isGrounded);
 
         //Jump Check
         if (Input.GetButtonDown("Jump") && isGrounded)
