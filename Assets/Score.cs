@@ -5,17 +5,10 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     [SerializeField] private UiController UICont;
-    public int score;
-    private int timer;
+    public int score = 1000;
 
     private void FixedUpdate()
     {
-        timer++;
-        if (timer > 60)
-        {
-            score++;
-            UICont.UpdateScore(score);
-            timer = 0;
-        }
+        UICont.UpdateScore(score);
     }
 }

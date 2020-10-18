@@ -123,13 +123,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd401403bad7bb4987773925f6494db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeSinceShoot: 0
   shootPos: {fileID: 4422229776726012724}
   bullet: {fileID: 1320033200754988409, guid: 1180a374f2a2b7140873e83beb70fe27, type: 3}
   health: 150
-  FireRate: 1.5
+  FireRate: 2.5
   pfDamagePopup: {fileID: 4887637815375853265, guid: a8ff3a242db94844fa851b693d3c9171,
     type: 3}
   target: {fileID: 0}
+  scoreUp: {fileID: 0}
 --- !u!95 &-7346028978879288496
 Animator:
   serializedVersion: 3

@@ -6,7 +6,7 @@ using UnityEngine.XR.WSA.Input;
 public class BasicEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    private float timeSinceShoot = 0f;
+    [SerializeField] private float timeSinceShoot = 0f;
 
     [SerializeField] private Transform shootPos;
     private Quaternion shootRot;
@@ -38,7 +38,7 @@ public class BasicEnemy : MonoBehaviour
     private void Update()
     {
         timeSinceShoot += Time.deltaTime;
-        if (timeSinceShoot >= FireRate && shootPos.position.x - target.position.x < 30)
+        if (timeSinceShoot >= (FireRate - (scoreUp.score / 1000)) && shootPos.position.x - target.position.x < 30)
         {
             shootPos.LookAt(target);
             timeSinceShoot = 0f;
@@ -61,6 +61,6 @@ public class BasicEnemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        scoreUp.score += 10;
+        scoreUp.score += Random.Range(7, 11);
     }
 }

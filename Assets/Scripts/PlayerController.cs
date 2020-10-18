@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-
+    [SerializeField] private Score playerScoreOnDeath;
     public bool isGrounded = false;
 
     public Animator animator;
@@ -34,7 +35,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            //Death Code
+            playerScoreOnDeath = GameObject.FindGameObjectWithTag("WorldHandle").GetComponent<Score>();
+            PlayerPrefs.SetInt("LastRunsScore", playerScoreOnDeath.score);
+            SceneManager.LoadScene(2);
         }
     }
 }
