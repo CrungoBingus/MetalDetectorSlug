@@ -13,17 +13,12 @@ public class EnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     private void Update()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
-
-        Vector3 PathToTarget;
-
-        PathToTarget = (target.transform.position - gameObject.GetComponent<Transform>().position).normalized;
-
-        gameObject.GetComponent<Rigidbody2D>().AddForce(PathToTarget * speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, 0.001f);
     }
 }
