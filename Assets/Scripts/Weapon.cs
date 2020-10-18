@@ -56,7 +56,8 @@ public class Weapon : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, notToHit);
         Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.cyan);
 
-        GameObject bul = Instantiate(bullet, endOfGun.position, endOfGun.rotation);
+        GameObject bul = Instantiate(bullet, endOfGun.position,
+            endOfGun.rotation);
         bul.GetComponent<bulletMove>().Damage = Damage;
         bul.GetComponent<bulletMove>().moveSpeed = bulletSpeed;
 
