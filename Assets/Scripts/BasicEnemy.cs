@@ -25,8 +25,11 @@ public class BasicEnemy : MonoBehaviour
     private Transform damagePopupTransform;
     private DamagePopup damagePopup;
 
+    [SerializeField] private Transform target;
+
     private void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -35,28 +38,15 @@ public class BasicEnemy : MonoBehaviour
         timeSinceShoot += Time.deltaTime;
         if (timeSinceShoot >= FireRate)
         {
+            shootPos.LookAt(target);
             timeSinceShoot = 0f;
-            shootRot = Quaternion.Euler(0f, 0f, Random.Range(180f, 130f));
-            Instantiate(bullet, shootPos.position, shootRot);
+            Instantiate(bullet, shootPos.position, shootPos.rotation);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         hold = collision.gameObject.GetComponent<bulletMove>().Damage;
-        damagePopupTransform = Instantiate(pfDamagePopup, this.transform.position, Quaternion.identity);
-        damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.Setup(hold.ToString());
-        health -= hold;
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        hold = (collision.gameObject.GetComponent<bulletMove>().Damage * 2);
         damagePopupTransform = Instantiate(pfDamagePopup, this.transform.position, Quaternion.identity);
         damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
         damagePopup.Setup(hold.ToString());

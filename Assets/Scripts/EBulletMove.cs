@@ -8,7 +8,7 @@ public class EBulletMove : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
+        transform.Translate(transform.right * Time.deltaTime * moveSpeed);
         Destroy(gameObject, 10);
     }
 
