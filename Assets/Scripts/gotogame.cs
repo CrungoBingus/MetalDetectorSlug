@@ -18,5 +18,9 @@ public class gotogame : MonoBehaviour
         {
             SceneManager.LoadScene("Game");
         }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }
