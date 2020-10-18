@@ -7,7 +7,7 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] private GameObject[] tilePrefabs;
 
     private Transform playerTransform;
-    private float spawnZ = 0.0f;
+    private float spawnZ = 60.0f;
     private float tileLength = 30.0f;
     private int nmbTilesOnScreen = 10;
 
