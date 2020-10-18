@@ -13,7 +13,7 @@ public class DamagePopup : MonoBehaviour
     {
         textMesh = transform.GetComponent<TextMeshPro>();
         Destroy(gameObject, 0.5f);
-        moveHold = Random.Range(-0.005f, 0.005f);
+        moveHold = Random.Range(-0.02f, 0.02f);
     }
 
     public void Setup(string DamageAmount)
